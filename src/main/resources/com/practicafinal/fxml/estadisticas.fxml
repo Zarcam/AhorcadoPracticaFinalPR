@@ -16,7 +16,7 @@
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/imagenDefault.png" />
+                  <Image url="@../images/imagenDefault.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="JUGADOR" textAlignment="CENTER">

@@ -15,7 +15,7 @@
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Selecciona un fichero...">
          <font>
-            <Font size="39.0" />
+            <Font size="31.0" />
          </font>
       </Text>
       <ListView fx:id="listaFicheros" prefHeight="200.0" prefWidth="200.0" />
@@ -35,6 +35,9 @@
                </graphic>
             </Button>
          </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
       </HBox>
    </children>
    <padding>

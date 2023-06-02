@@ -10,10 +10,11 @@ import java.io.IOException;
 public class AhorcadoApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AhorcadoApplication.class.getResource("fxml/cambiarFichero.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(AhorcadoApplication.class.getResource("fxml/menuPrincipal.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 440);
         stage.setTitle("Menu");
         stage.setScene(scene);
+        stage.setResizable(false);
 
         stage.show();
     }

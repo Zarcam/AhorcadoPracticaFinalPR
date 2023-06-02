@@ -99,9 +99,32 @@ public class JuegoAhorcadoController implements Initializable {
         }
     }
 
+    private void obtenerArchivoPalabras(){
+        try {
+            Scanner lector = new Scanner(new File(JuegoAhorcadoController.class.getResource("opciones.txt").getPath()));
+            String archivo = "castellano.txt";
+            String linea;
+
+            while (lector.hasNext()) {
+                linea = lector.nextLine();
+                if (linea.matches("archivoPalabras.*")) {
+                    archivo = linea.split("=")[1];
+                }
+            }
+
+            lector.close();
+
+            arhivoPalabra = new File(Objects.requireNonNull(JuegoAhorcadoController.class.getResource("archivosDePalabras/" + archivo)).getPath());
+        }catch (FileNotFoundException ex){
+            System.out.println("Archivo opciones no encontrado");
+        }catch (NullPointerException ex){
+            System.out.println("Archivo opciones no econtrado");
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        arhivoPalabra = new File(Objects.requireNonNull(JuegoAhorcadoController.class.getResource("archivosDePalabras/castellano.txt")).getPath());
+        obtenerArchivoPalabras();
 
         palabraOculta = generarPalabra().toUpperCase();
         System.out.println(palabraOculta);
@@ -109,7 +132,6 @@ public class JuegoAhorcadoController implements Initializable {
         solucion = palabraOculta.toCharArray();
         letrasDescubiertas = new char[solucion.length];
         Arrays.fill(letrasDescubiertas, '_');
-
         mostrarDescubierto();
     }
 }

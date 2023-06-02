@@ -18,9 +18,10 @@
             <Font size="39.0" />
          </font>
       </Text>
-      <ListView prefHeight="200.0" prefWidth="200.0" />
-      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+      <ListView fx:id="listaFicheros" prefHeight="200.0" prefWidth="200.0" />
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="35.0">
          <children>
+            <Button fx:id="botonSeleccion" disable="true" mnemonicParsing="false" text="Seleccionar" />
             <Button fx:id="botonAyuda" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">

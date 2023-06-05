@@ -15,7 +15,6 @@ public class AhorcadoApplication extends Application {
         stage.setTitle("Menu");
         stage.setScene(scene);
         stage.setResizable(false);
-
         stage.show();
     }
 

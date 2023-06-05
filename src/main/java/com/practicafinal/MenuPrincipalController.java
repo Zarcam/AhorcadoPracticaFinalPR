@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
@@ -24,19 +25,24 @@ public class MenuPrincipalController implements Initializable {
 
         switch(boton.getText().toLowerCase()){
             case "jugar":
-                abrirJugar(boton);
+                abrirOpcionesPartida(boton);
                 break;
             default:
                 break;
         }
     }
 
-    private void abrirJugar(Button boton){
+    private void abrirOpcionesPartida(Node nodo){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MenuPrincipalController.class.getResource("fxml/juegoAhorcado.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MenuPrincipalController.class.getResource("fxml/opcionesPartida.fxml"));
 
-            Stage stage = (Stage) boton.getScene().getWindow();
-            Scene scene = new Scene(fxmlLoader.load(), boton.getScene().getWindow().getWidth(), boton.getScene().getWindow().getHeight());
+            Stage stage = (Stage) nodo.getScene().getWindow();
+            Scene scene = new Scene(fxmlLoader.load(), 300, 200);
+
+            stage.setTitle("Opciones de la partida");
+            stage.setResizable(true);
+            stage.setHeight(250);
+            stage.setWidth(350);
             stage.setScene(scene);
         }catch (IOException ex){
             System.out.println("Tengo que poner buenos catch");
@@ -44,25 +50,8 @@ public class MenuPrincipalController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Stage stageCambiarArchivo = new Stage();
-        stageCambiarArchivo.initModality(Modality.APPLICATION_MODAL);
-
         botonCambiarArchivo.setOnAction(event -> {
-            try {
-                if(!stageCambiarArchivo.isShowing()) {
-                    FXMLLoader fxmlLoader = new FXMLLoader(AhorcadoApplication.class.getResource("fxml/cambiarFichero.fxml"));
-                    Scene scene = new Scene(fxmlLoader.load(), 400, 200);
-                    stageCambiarArchivo.setScene(scene);
-
-                    stageCambiarArchivo.setTitle("Cambiar archivo");
-                    stageCambiarArchivo.setResizable(false);
-                    stageCambiarArchivo.showAndWait();
-                }else{
-                    stageCambiarArchivo.toFront();
-                }
-            }catch(IOException ex){
-                System.out.println("Falló");
-            }
+            CambiarFicheroController.abrirCambioDeFichero();
         });
     }
 }

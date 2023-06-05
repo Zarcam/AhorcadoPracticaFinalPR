@@ -3,14 +3,18 @@ package com.practicafinal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -24,6 +28,26 @@ public class CambiarFicheroController implements Initializable {
 
     private ObservableList<String> datos;
     private File directorioArchivos;
+
+    public static void abrirCambioDeFichero(){
+        Stage stageCambiarArchivo = new Stage();
+        stageCambiarArchivo.initModality(Modality.APPLICATION_MODAL);
+
+        try {
+            if(!stageCambiarArchivo.isShowing()) {
+                FXMLLoader fxmlLoader = new FXMLLoader(AhorcadoApplication.class.getResource("fxml/cambiarFichero.fxml"));
+                Scene scene = new Scene(fxmlLoader.load(), 400, 200);
+                stageCambiarArchivo.setScene(scene);
+                stageCambiarArchivo.setTitle("Cambiar archivo");
+                stageCambiarArchivo.setResizable(false);
+                stageCambiarArchivo.showAndWait();
+            }else{
+                stageCambiarArchivo.toFront();
+            }
+        }catch(IOException ex){
+            System.out.println("Falló");
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

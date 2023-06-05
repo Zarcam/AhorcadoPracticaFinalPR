@@ -21,7 +21,7 @@ public class JuegoAhorcadoController implements Initializable {
     @FXML
     private ImageView imagenAhorcado;
 
-    private File arhivoPalabra;
+    //private File arhivoPalabra;
 
     private String palabraOculta;
     private char[] solucion;
@@ -57,7 +57,7 @@ public class JuegoAhorcadoController implements Initializable {
         textoPalabra.setText(textoAMostrar);
     }
 
-    private String generarPalabra(){
+    /*private String generarPalabra(){
         try {
             Scanner lector = new Scanner(arhivoPalabra);
 
@@ -79,7 +79,7 @@ public class JuegoAhorcadoController implements Initializable {
 
             System.out.println(palabra);
 
-            if(palabra.matches(".*[^ñáéíóúÁÉÍÓÚa-zA-Z].*") || palabra.length() < 3){
+            if(palabra.matches(".*[^ñáéíóúÁÉÍÓÚa-zA-Z].*") || palabra.length() < 3 || palabra.length() > 20){
                 return generarPalabra();
             }else{
                 String[] tildes = {"á", "é", "í", "ó", "ú"};
@@ -120,13 +120,14 @@ public class JuegoAhorcadoController implements Initializable {
         }catch (NullPointerException ex){
             System.out.println("Archivo opciones no econtrado");
         }
+    }*/
+
+    public void initPalabra(String palabra){
+        palabraOculta = palabra.toUpperCase();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        obtenerArchivoPalabras();
-
-        palabraOculta = generarPalabra().toUpperCase();
         System.out.println(palabraOculta);
 
         solucion = palabraOculta.toCharArray();

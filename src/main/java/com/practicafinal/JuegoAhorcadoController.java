@@ -23,8 +23,6 @@ public class JuegoAhorcadoController implements Initializable {
     @FXML
     private ImageView imagenAhorcado;
 
-    //private File arhivoPalabra;
-
     private String palabraOculta;
     private char[] solucion;
     private char[] letrasDescubiertas;
@@ -54,15 +52,17 @@ public class JuegoAhorcadoController implements Initializable {
 
         boton.setDisable(true);
 
-
+        comprobarResultado();
     }
 
     private void comprobarResultado(){
         if(fallos >= 6){
-
+            MensajeFinalController.abrirMensajeFinal("HAS PERDIDO", true, "Solucion: " + String.valueOf(solucion), ":(", "-5 puntos");
+            MenuPrincipalController.abrirMenu((Stage) textoPalabra.getScene().getWindow());
         }
         if(Arrays.compare(solucion, letrasDescubiertas) == 0){
-
+            MensajeFinalController.abrirMensajeFinal("HAS GANADO", false, "Solucion: " + String.valueOf(solucion), "B)", "+10 puntos");
+            MenuPrincipalController.abrirMenu((Stage) textoPalabra.getScene().getWindow());
         }
     }
 

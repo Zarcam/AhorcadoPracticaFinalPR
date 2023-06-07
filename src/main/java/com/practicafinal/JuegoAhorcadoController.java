@@ -2,18 +2,20 @@ package com.practicafinal;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.Scanner;
+
 
 public class JuegoAhorcadoController implements Initializable {
     @FXML
@@ -26,6 +28,8 @@ public class JuegoAhorcadoController implements Initializable {
     private String palabraOculta;
     private char[] solucion;
     private char[] letrasDescubiertas;
+
+    private int fallos = 0;
 
     @FXML
     private void pulsadoBoton(ActionEvent event){
@@ -41,9 +45,25 @@ public class JuegoAhorcadoController implements Initializable {
             mostrarDescubierto();
         }else{
             System.out.println("Fallo");
+
+            fallos++;
+            if(fallos < 7) {
+                imagenAhorcado.setImage(new Image(JuegoAhorcadoController.class.getResource("images/ahorcado/ahorcado" + fallos + ".png").toString()));
+            }
         }
 
         boton.setDisable(true);
+
+
+    }
+
+    private void comprobarResultado(){
+        if(fallos >= 6){
+
+        }
+        if(Arrays.compare(solucion, letrasDescubiertas) == 0){
+
+        }
     }
 
     private void mostrarDescubierto(){
@@ -57,82 +77,40 @@ public class JuegoAhorcadoController implements Initializable {
         textoPalabra.setText(textoAMostrar);
     }
 
-    /*private String generarPalabra(){
-        try {
-            Scanner lector = new Scanner(arhivoPalabra);
-
-            int totLineas = 0;
-            while (lector.hasNext()){
-                totLineas++;
-                lector.nextLine();
-            }
-
-            lector.close();
-
-            Scanner buscador = new Scanner(arhivoPalabra);
-            String palabra = "";
-
-            int numAleatorio = Utilidades.aleatorioEntre(1, totLineas);
-            for(int i = 0; i < numAleatorio; i++){
-                palabra = buscador.nextLine();
-            }
-
-            System.out.println(palabra);
-
-            if(palabra.matches(".*[^ñáéíóúÁÉÍÓÚa-zA-Z].*") || palabra.length() < 3 || palabra.length() > 20){
-                return generarPalabra();
-            }else{
-                String[] tildes = {"á", "é", "í", "ó", "ú"};
-                String[] sinTildes = {"a", "e", "i", "o", "u"};
-
-                for(int i = 0; i < tildes.length; i++){
-                    if(palabra.contains(tildes[i])){
-                        palabra = palabra.replace(tildes[i], sinTildes[i]);
-                    }
-                }
-
-                return palabra;
-            }
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void obtenerArchivoPalabras(){
-        try {
-            Scanner lector = new Scanner(new File(JuegoAhorcadoController.class.getResource("opciones.txt").getPath()));
-            String archivo = "castellano.txt";
-            String linea;
-
-            while (lector.hasNext()) {
-                linea = lector.nextLine();
-                if (linea.matches("archivoPalabras.*")) {
-                    archivo = linea.split("=")[1];
-                }
-            }
-
-            lector.close();
-
-            arhivoPalabra = new File(Objects.requireNonNull(JuegoAhorcadoController.class.getResource("archivosDePalabras/" + archivo)).getPath());
-        }catch (FileNotFoundException ex){
-            System.out.println("Archivo opciones no encontrado");
-        }catch (NullPointerException ex){
-            System.out.println("Archivo opciones no econtrado");
-        }
-    }*/
-
     public void initPalabra(String palabra){
         palabraOculta = palabra.toUpperCase();
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println(palabraOculta);
 
         solucion = palabraOculta.toCharArray();
         letrasDescubiertas = new char[solucion.length];
         Arrays.fill(letrasDescubiertas, '_');
         mostrarDescubierto();
+    }
+
+    public static void abrirJugar(Stage stage, String palabra){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MenuPrincipalController.class.getResource("fxml/juegoAhorcado.fxml"));
+
+            Scene scene = new Scene(fxmlLoader.load(), 600, 350);
+
+            stage.setTitle("El Ahorcado");
+
+            JuegoAhorcadoController controller = fxmlLoader.getController();
+            controller.initPalabra(palabra);
+
+            stage.setScene(scene);
+            stage.sizeToScene();
+
+            //Recalcula el tamaño del escenario
+            stage.hide();
+            stage.show();
+        }catch (IOException ex){
+            ex.initCause(ex.getCause());
+        }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }

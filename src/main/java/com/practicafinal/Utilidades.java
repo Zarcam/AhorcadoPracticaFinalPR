@@ -42,7 +42,7 @@ public class Utilidades {
         return indices;
     }
 
-    public static void reemplazarLinea(File archivo, String textoAntiguo, String textoNuevo){
+    public static void reemplazarLinea(File archivo, String regex, String textoNuevo){
         try {
             Scanner lector = new Scanner(archivo);
             System.out.println(archivo.getPath());
@@ -57,7 +57,7 @@ public class Utilidades {
 
             for(int i = 0; i < lineas.size(); i++){
                 System.out.println(i);
-                if(lineas.get(i).matches(textoAntiguo+".*")){
+                if(lineas.get(i).matches(regex)){
                     lineas.set(i, textoNuevo);
                     System.out.println(lineas.get(i));
                 }

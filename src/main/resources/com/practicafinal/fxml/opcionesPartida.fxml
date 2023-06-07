@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -20,7 +21,10 @@
       </VBox>
       <HBox alignment="CENTER" spacing="10.0">
          <children>
-            <TextField fx:id="fieldPalabra" prefHeight="30.0" promptText="Palabra personalizada..." />
+            <TextField fx:id="fieldPalabra" prefHeight="30.0" promptText="Palabra personalizada...">
+               <tooltip>
+                  <Tooltip fx:id="pistaField" text="Solo caracteres de la A a la Z, Ñ, Tildes y dieresis." />
+               </tooltip></TextField>
             <Button fx:id="botonOk" mnemonicParsing="false" onAction="#pulsadoBoton" prefHeight="30.0" prefWidth="35.0" text="OK" wrapText="true">
                <font>
                   <Font size="12.0" />

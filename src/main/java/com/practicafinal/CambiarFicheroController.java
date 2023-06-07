@@ -98,7 +98,7 @@ public class CambiarFicheroController implements Initializable {
                 File opciones = new File(CambiarFicheroController.class.getResource("opciones.txt").getPath());
                 String seleccion = datos.get(listaFicheros.getSelectionModel().getSelectedIndex());
 
-                Utilidades.reemplazarLinea(opciones, "archivoPalabras=", "archivoPalabras="+seleccion);
+                Utilidades.reemplazarLinea(opciones, "archivoPalabras=.*", "archivoPalabras="+seleccion);
 
                 Button boton = (Button) event.getSource();
                 Stage stage = (Stage) boton.getScene().getWindow();

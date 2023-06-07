@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 
 
-public class JuegoAhorcadoController implements Initializable {
+public class JuegoAhorcadoController {
     @FXML
     private Label textoPalabra;
     @FXML
@@ -41,27 +41,28 @@ public class JuegoAhorcadoController implements Initializable {
             }
 
             mostrarDescubierto();
+            boton.setStyle("-fx-background-color: green");
         }else{
             System.out.println("Fallo");
-
             fallos++;
+
             if(fallos < 7) {
                 imagenAhorcado.setImage(new Image(JuegoAhorcadoController.class.getResource("images/ahorcado/ahorcado" + fallos + ".png").toString()));
             }
+            boton.setStyle("-fx-background-color: red");
         }
 
         boton.setDisable(true);
-
         comprobarResultado();
     }
 
     private void comprobarResultado(){
         if(fallos >= 6){
-            MensajeFinalController.abrirMensajeFinal("HAS PERDIDO", true, "Solucion: " + String.valueOf(solucion), ":(", "-5 puntos");
+            MensajeFinalController.abrirMensajeFinal("HAS PERDIDO","Solucion: " + String.valueOf(solucion), ":(", "-5 puntos");
             MenuPrincipalController.abrirMenu((Stage) textoPalabra.getScene().getWindow());
         }
         if(Arrays.compare(solucion, letrasDescubiertas) == 0){
-            MensajeFinalController.abrirMensajeFinal("HAS GANADO", false, "Solucion: " + String.valueOf(solucion), "B)", "+10 puntos");
+            MensajeFinalController.abrirMensajeFinal("HAS GANADO","Solucion: " + String.valueOf(solucion), "B)", "+10 puntos");
             MenuPrincipalController.abrirMenu((Stage) textoPalabra.getScene().getWindow());
         }
     }
@@ -107,10 +108,5 @@ public class JuegoAhorcadoController implements Initializable {
         }catch (IOException ex){
             ex.initCause(ex.getCause());
         }
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 }

@@ -8,18 +8,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.practicafinal.ModificarJugadoresController">
    <children>
-      <Button mnemonicParsing="false" text="Volver" wrapText="true">
+      <Button mnemonicParsing="false" onAction="#pulsadoBoton" text="Volver" wrapText="true">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <TableView prefHeight="200.0" prefWidth="400.0">
+      <TableView fx:id="tablaJugadores" prefHeight="200.0" prefWidth="400.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="IMAGEN" />
-          <TableColumn prefWidth="75.0" text="NOMBRE" />
+          <TableColumn fx:id="columnaImagen" prefWidth="75.0" text="IMAGEN" />
+          <TableColumn fx:id="columnaNombre" prefWidth="75.0" text="NOMBRE" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -29,13 +28,13 @@
          <children>
             <VBox alignment="BOTTOM_CENTER" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="Añadir" />
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Modificar">
+                  <Button mnemonicParsing="false" onAction="#pulsadoBoton" text="Añadir" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#pulsadoBoton" text="Modificar">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Button>
-                  <Button layoutX="10.0" layoutY="34.0" mnemonicParsing="false" text="Borrar" />
+                  <Button layoutX="10.0" layoutY="34.0" mnemonicParsing="false" onAction="#pulsadoBoton" text="Borrar" />
                </children>
             </VBox>
          </children>

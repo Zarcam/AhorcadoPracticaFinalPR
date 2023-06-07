@@ -16,15 +16,15 @@ import java.util.ResourceBundle;
 
 public class MensajeFinalController implements Initializable {
     @FXML
-    Text textResultado;
+    private Text textResultado;
     @FXML
-    Text textSolucion;
+    private Text textSolucion;
     @FXML
-    Button botonOk;
+    private Button botonOk;
     @FXML
-    Label labelPuntos;
+    private Label labelPuntos;
 
-    public static void abrirMensajeFinal(String resultado, boolean mostrarSolucion, String solucion, String simboloBoton, String puntos){
+    public static void abrirMensajeFinal(String resultado, String solucion, String simboloBoton, String puntos){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MenuPrincipalController.class.getResource("fxml/mensajeFinal.fxml"));
 
@@ -37,7 +37,7 @@ public class MensajeFinalController implements Initializable {
             stage.setScene(scene);
 
             MensajeFinalController controller = fxmlLoader.getController();
-            controller.initMensaje(resultado, mostrarSolucion, solucion, simboloBoton, puntos);
+            controller.initMensaje(resultado, solucion, simboloBoton, puntos);
 
             stage.showAndWait();
         }catch (IOException ex){
@@ -45,13 +45,9 @@ public class MensajeFinalController implements Initializable {
         }
     }
 
-    public void initMensaje(String resultado, boolean mostrarSolucion, String solucion, String simboloBoton, String puntos){
+    public void initMensaje(String resultado, String solucion, String simboloBoton, String puntos){
         textResultado.setText(resultado);
-
         textSolucion.setText(solucion);
-        if(!mostrarSolucion){
-            textSolucion.setOpacity(0);
-        }
 
         botonOk.setText(simboloBoton);
         labelPuntos.setText(puntos);

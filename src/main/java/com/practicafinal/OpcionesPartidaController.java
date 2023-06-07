@@ -26,17 +26,17 @@ import java.util.Scanner;
 
 public class OpcionesPartidaController implements Initializable {
     @FXML
-    Button botonOk;
+    private Button botonOk;
     @FXML
-    Button botonAleatoria;
+    private Button botonAleatoria;
     @FXML
-    Button botonArchivo;
+    private Button botonArchivo;
     @FXML
-    TextField fieldPalabra;
+    private TextField fieldPalabra;
     @FXML
-    ChoiceBox cajaJugador;
+    private ChoiceBox cajaJugador;
     @FXML
-    Tooltip pistaField;
+    private Tooltip pistaField;
 
 
     private File arhivoPalabra;

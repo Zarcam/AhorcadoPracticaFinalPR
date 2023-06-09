@@ -10,7 +10,7 @@ public class Jugador {
     private IntegerProperty partidasGanadas = new SimpleIntegerProperty();
     private IntegerProperty partidasPerdidas = new SimpleIntegerProperty();
 
-    public Jugador(String nombre, Image imagen, int puntos, int partidasGanadas, int partidasPerdidas){
+    public Jugador(String nombre, int partidasGanadas, int partidasPerdidas, int puntos, Image imagen){
         this.nombre.setValue(nombre);
         this.imagen.setValue(imagen);
         this.puntos.setValue(puntos);

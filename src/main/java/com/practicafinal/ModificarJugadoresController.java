@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -34,19 +35,34 @@ public class ModificarJugadoresController implements Initializable {
     private void pulsadoBoton(ActionEvent event){
         Button boton = (Button) event.getSource();
 
+        switch(boton.getText()){
+            case "Volver":
+                MenuPrincipalController.abrirMenu((Stage) boton.getScene().getWindow());
+                break;
+            case "Añadir":
+                AnadirJugadorController.abrirAnadirJugador(jugadores);
+                break;
+            case "Editar":
+                break;
+            case "Borrar":
+                break;
+            default:
+                break;
+        }
 
     }
 
-    public static void abrirModificar(){
+    public static void abrirModificarJugadores(Stage stage){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(ModificarJugadoresController.class.getResource("fxml/modificarJugadores.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-            Stage stage = new Stage();
 
             stage.setTitle("Modificar");
             stage.setScene(scene);
             stage.setResizable(false);
 
+            //Recalcular tamaño
+            stage.hide();
             stage.show();
         }catch (IOException ex){
             System.out.println("Coso raro");
@@ -55,13 +71,7 @@ public class ModificarJugadoresController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ArrayList<Jugador> listaJugadores = new ArrayList<>();
-
-        String path = ModificarJugadoresController.class.getResource("images/ayuda.png").toString();
-        Image imagen = new Image(path, 40, 40, true, true);
-
-        Jugador jugador1 = new Jugador("Pepe", imagen, 0, 0, 0);
-        listaJugadores.add(jugador1);
+        ArrayList<Jugador> listaJugadores = AdministrarJugadores.extraerJugadoresFichero();
 
         jugadores = FXCollections.observableArrayList(listaJugadores);
         tablaJugadores.setItems(jugadores);
@@ -77,7 +87,7 @@ public class ModificarJugadoresController implements Initializable {
                   if(item == null || empty){
                       setGraphic(null);
                   }else{
-                      view.setImage(imagen);
+                      view.setImage(item);
                       setGraphic(view);
                   }
               }

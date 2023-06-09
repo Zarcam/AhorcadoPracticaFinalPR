@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.practicafinal.AnadirJugadorController">
+   <children>
+      <HBox alignment="CENTER" spacing="10.0">
+         <children>
+            <Label text="Nombre" />
+            <TextField fx:id="nombreField">
+               <tooltip>
+                  <Tooltip text="El caracter ';' no esta permitido" />
+               </tooltip></TextField>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" spacing="10.0">
+         <children>
+            <Label text="Imagen (URL)" />
+            <TextField fx:id="imagenField">
+               <tooltip>
+                  <Tooltip text="Introduce un URL o la ubicacion de la imagen" />
+               </tooltip></TextField>
+            <Button fx:id="botonImagen" contentDisplay="TOP" mnemonicParsing="false" onAction="#pulsadoBoton" text="Probar imagen">
+               <graphic>
+                  <ImageView fx:id="imagenJugador" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/imagenDefault.png" />
+                     </image></ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+      <Button fx:id="botonConfirmar" mnemonicParsing="false" onAction="#pulsadoBoton" text="Confirmar" />
+   </children>
+</VBox>

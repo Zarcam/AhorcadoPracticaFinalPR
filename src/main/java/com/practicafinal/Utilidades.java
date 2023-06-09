@@ -67,7 +67,9 @@ public class Utilidades {
 
             for(String i : lineas){
                 writer.write(i);
-                writer.write("\n");
+                if(!i.isBlank()) {
+                    writer.write("\n");
+                }
             }
 
             writer.close();

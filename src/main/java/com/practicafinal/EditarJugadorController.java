@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AnadirJugadorController {
+public class EditarJugadorController {
     @FXML
     private TextField nombreField;
     @FXML
@@ -28,13 +28,14 @@ public class AnadirJugadorController {
     @FXML
     private ImageView imagenJugador;
 
-    private ObservableList<Jugador> jugadores;
+    private ObservableList<Jugador> listaJugadores;
+    private Jugador jugador;
 
     @FXML
     private void pulsadoBoton(ActionEvent event){
         Button boton = (Button) event.getSource();
 
-        switch (boton.getId()){
+        switch(boton.getId()){
             case "botonImagen":
                 try {
                     if(imagenField.getText().contains(";")){
@@ -49,7 +50,7 @@ public class AnadirJugadorController {
                 break;
             case "botonConfirmar":
                 if(!nombreField.getText().contains(";") && !nombreField.getText().isBlank() && !comprobarRepetido()){
-                    AdministrarJugadores.crearJugador(nombreField.getText(), imagenField.getText(), jugadores, imagenJugador.getImage().getUrl());
+                    AdministrarJugadores.editarJugador(jugador, nombreField.getText(), imagenField.getText(), imagenJugador.getImage().getUrl());
                     Stage stage = (Stage) boton.getScene().getWindow();
                     stage.close();
                 }else if(comprobarRepetido()){
@@ -63,7 +64,7 @@ public class AnadirJugadorController {
     }
 
     private boolean comprobarRepetido(){
-        for(Jugador i : jugadores){
+        for(Jugador i : listaJugadores){
             if(i.NombreProperty().getValue().equals(nombreField.getText())){
                 return true;
             }
@@ -71,14 +72,14 @@ public class AnadirJugadorController {
         return false;
     }
 
-    public static void abrirAnadirJugador(ObservableList<Jugador> listaJugadores){
+    public static void abrirEditarJugador(Jugador jugador, ObservableList<Jugador> listaJugadores){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(AnadirJugadorController.class.getResource("fxml/anadirYEditarJugador.fxml"));
-            fxmlLoader.setController(new AnadirJugadorController());
+            FXMLLoader fxmlLoader = new FXMLLoader(EditarJugadorController.class.getResource("fxml/anadirYEditarJugador.fxml"));
+            fxmlLoader.setController(new EditarJugadorController());
             Parent parent = fxmlLoader.load();
 
-            AnadirJugadorController controller = fxmlLoader.getController();
-            controller.initListaJugadores(listaJugadores);
+            EditarJugadorController controller = fxmlLoader.getController();
+            controller.initJugadores(jugador, listaJugadores);
 
             Scene scene = new Scene(parent, 376, 230);
 
@@ -86,7 +87,7 @@ public class AnadirJugadorController {
             stage.setScene(scene);
 
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Añadir jugador");
+            stage.setTitle("Editar jugador");
             stage.setResizable(false);
 
             stage.show();
@@ -96,7 +97,10 @@ public class AnadirJugadorController {
         }
     }
 
-    public void initListaJugadores(ObservableList<Jugador> listaJugadores){
-        this.jugadores = listaJugadores;
+    public void initJugadores(Jugador jugador, ObservableList<Jugador> listaJugadores){
+        this.jugador = jugador;
+        this.listaJugadores = listaJugadores;
+        nombreField.setText(jugador.NombreProperty().getValue());
+        imagenJugador.setImage(jugador.ImagenProperty().getValue());
     }
 }

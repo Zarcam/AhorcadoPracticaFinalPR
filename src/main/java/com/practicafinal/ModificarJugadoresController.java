@@ -43,8 +43,10 @@ public class ModificarJugadoresController implements Initializable {
                 AnadirJugadorController.abrirAnadirJugador(jugadores);
                 break;
             case "Editar":
+                EditarJugadorController.abrirEditarJugador(tablaJugadores.getSelectionModel().getSelectedItem(), jugadores);
                 break;
             case "Borrar":
+                AdministrarJugadores.borrarJugador(tablaJugadores.getSelectionModel().getSelectedItem(), jugadores);
                 break;
             default:
                 break;

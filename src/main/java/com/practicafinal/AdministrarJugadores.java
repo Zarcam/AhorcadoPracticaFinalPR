@@ -29,7 +29,37 @@ public class AdministrarJugadores {
         return listaJugadores;
     }
 
-    public static void crearJugador(String nombre, String imagenURL, ObservableList<Jugador> jugadores, Image imagenAlt){
+    public static void editarJugador(Jugador jugador, String nuevoNombre, String nuevaImagen, String imagenAlt){
+        Image imagen;
+
+        try {
+            if(nuevaImagen.contains(";")){
+                throw new IllegalArgumentException("El URL contiene un ;");
+            }
+
+            imagen = new Image(nuevaImagen, 50, 50, true, true);
+        }catch (NullPointerException | IllegalArgumentException ex){
+            imagen = new Image(imagenAlt, 50, 50, true, true);
+        }
+
+        try {
+            File archivoJugadores = new File(AdministrarJugadores.class.getResource("jugadores.txt").getPath());
+
+            String nuevosDatos = nuevoNombre.concat(";");
+            nuevosDatos = nuevosDatos.concat("ganadas=").concat(jugador.PartidasGanadasProperty().getValue().toString()).concat(";");
+            nuevosDatos = nuevosDatos.concat("perdidas=").concat(jugador.PartidasPerdidasProperty().getValue().toString()).concat(";");
+            nuevosDatos = nuevosDatos.concat("puntos=").concat(jugador.PuntosProperty().getValue().toString()).concat(";").concat(imagen.getUrl());
+
+            Utilidades.reemplazarLinea(archivoJugadores, jugador.NombreProperty().getValue()+".*", nuevosDatos);
+
+            jugador.setNombre(nuevoNombre);
+            jugador.setImagen(imagen);
+        }catch (NullPointerException ex){
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public static void crearJugador(String nombre, String imagenURL, ObservableList<Jugador> jugadores, String imagenAlt){
         Image imagen;
 
         try {
@@ -39,7 +69,7 @@ public class AdministrarJugadores {
 
             imagen = new Image(imagenURL, 50, 50, true, true);
         }catch (NullPointerException | IllegalArgumentException ex){
-            imagen = new Image(imagenAlt.getUrl(), 50, 50, true, true);
+            imagen = new Image(imagenAlt, 50, 50, true, true);
         }
 
         try {
@@ -55,6 +85,18 @@ public class AdministrarJugadores {
             writer.close();
         }catch (IOException | NullPointerException ex){
             throw new RuntimeException(ex);
+        }
+    }
+
+    public static void borrarJugador(Jugador jugador, ObservableList<Jugador> listaJugadores){
+        try {
+            listaJugadores.remove(jugador);
+
+            File archivoJugadores = new File(AdministrarJugadores.class.getResource("jugadores.txt").getPath());
+
+            Utilidades.reemplazarLinea(archivoJugadores, jugador.NombreProperty().getValue()+".*", "");
+        }catch (NullPointerException ex){
+            System.out.println("No se ha podido eliminar al jugador");
         }
     }
 }

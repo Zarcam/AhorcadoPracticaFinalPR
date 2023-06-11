@@ -9,6 +9,7 @@ public class Jugador {
     private IntegerProperty puntos = new SimpleIntegerProperty();
     private IntegerProperty partidasGanadas = new SimpleIntegerProperty();
     private IntegerProperty partidasPerdidas = new SimpleIntegerProperty();
+    private IntegerProperty puestoRanking = new SimpleIntegerProperty();
 
     public Jugador(String nombre, int partidasGanadas, int partidasPerdidas, int puntos, Image imagen){
         this.nombre.setValue(nombre);
@@ -18,6 +19,9 @@ public class Jugador {
         this.partidasPerdidas.setValue(partidasPerdidas);
     }
 
+    public IntegerProperty PuestoProperty(){return puestoRanking;}
+
+    public void setPuestoRanking(int puesto){this.puestoRanking.setValue(puesto);}
 
     public StringProperty NombreProperty() {
         return nombre;

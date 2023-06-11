@@ -25,8 +25,11 @@ public class MenuPrincipalController implements Initializable {
             case "jugar":
                 OpcionesPartidaController.abrirOpcionesPartida((Stage) boton.getScene().getWindow());
                 break;
-            case "modificar jugadores":
+            case "listar/modificar jugadores":
                 ModificarJugadoresController.abrirModificarJugadores((Stage) boton.getScene().getWindow());
+                break;
+            case "ranking":
+                RankingController.abrirRanking();
                 break;
             default:
                 break;

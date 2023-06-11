@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class AdministrarJugadores {
@@ -98,5 +99,26 @@ public class AdministrarJugadores {
         }catch (NullPointerException ex){
             System.out.println("No se ha podido eliminar al jugador");
         }
+    }
+
+    public static ArrayList<Jugador> buscarRankingJugadores(){
+        ArrayList<Jugador> jugadores = extraerJugadoresFichero();
+        ArrayList<Jugador> ranking = new ArrayList<>();
+
+        int cont = 1;
+        while(jugadores.size() > 0 && ranking.size() < 10) {
+            Jugador mayorPuntaje = jugadores.get(0);
+            for (Jugador i : jugadores) {
+                if (i.PuntosProperty().getValue() > mayorPuntaje.PuestoProperty().getValue()) {
+                    mayorPuntaje = i;
+                }
+            }
+            mayorPuntaje.setPuestoRanking(cont);
+            ranking.add(mayorPuntaje);
+            jugadores.remove(mayorPuntaje);
+            cont++;
+        }
+
+        return ranking;
     }
 }

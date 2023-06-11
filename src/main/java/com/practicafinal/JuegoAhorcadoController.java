@@ -29,6 +29,8 @@ public class JuegoAhorcadoController {
 
     private int fallos = 0;
 
+    private Jugador jugador;
+
     @FXML
     private void pulsadoBoton(ActionEvent event){
         Button boton = (Button) event.getSource();
@@ -60,11 +62,16 @@ public class JuegoAhorcadoController {
         if(fallos >= 6){
             MensajeFinalController.abrirMensajeFinal("HAS PERDIDO","Solucion: " + String.valueOf(solucion), ":(", "-5 puntos");
             MenuPrincipalController.abrirMenu((Stage) textoPalabra.getScene().getWindow());
+            jugador.setPuntos(jugador.PuntosProperty().getValue()-5);
+            jugador.setPartidasPerdidas(jugador.PartidasPerdidasProperty().getValue()+1);
         }
         if(Arrays.compare(solucion, letrasDescubiertas) == 0){
             MensajeFinalController.abrirMensajeFinal("HAS GANADO","Solucion: " + String.valueOf(solucion), "B)", "+10 puntos");
             MenuPrincipalController.abrirMenu((Stage) textoPalabra.getScene().getWindow());
+            jugador.setPuntos(jugador.PuntosProperty().getValue()+10);
+            jugador.setPartidasGanadas(jugador.PartidasGanadasProperty().getValue()+1);
         }
+        AdministrarJugadores.actualizarPuntos(jugador);
     }
 
     private void mostrarDescubierto(){
@@ -88,7 +95,12 @@ public class JuegoAhorcadoController {
         mostrarDescubierto();
     }
 
-    public static void abrirJugar(Stage stage, String palabra){
+    public void initJugador(Jugador jugador){
+        this.jugador = jugador;
+        System.out.println(this.jugador.NombreProperty().getValue());
+    }
+
+    public static void abrirJugar(Stage stage, String palabra, Jugador jugador){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MenuPrincipalController.class.getResource("fxml/juegoAhorcado.fxml"));
 
@@ -98,6 +110,7 @@ public class JuegoAhorcadoController {
 
             JuegoAhorcadoController controller = fxmlLoader.getController();
             controller.initPalabra(palabra);
+            controller.initJugador(jugador);
 
             stage.setScene(scene);
             stage.sizeToScene();

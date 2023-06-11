@@ -45,9 +45,7 @@ public class Utilidades {
     public static void reemplazarLinea(File archivo, String regex, String textoNuevo){
         try {
             Scanner lector = new Scanner(archivo);
-            System.out.println(archivo.getPath());
             ArrayList<String> lineas = new ArrayList<>();
-            System.out.println("Furulas");
 
             while(lector.hasNext()){
                 lineas.add(lector.nextLine());
@@ -56,10 +54,8 @@ public class Utilidades {
             lector.close();
 
             for(int i = 0; i < lineas.size(); i++){
-                System.out.println(i);
                 if(lineas.get(i).matches(regex)){
                     lineas.set(i, textoNuevo);
-                    System.out.println(lineas.get(i));
                 }
             }
 

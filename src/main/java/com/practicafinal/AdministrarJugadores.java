@@ -51,7 +51,7 @@ public class AdministrarJugadores {
             nuevosDatos = nuevosDatos.concat("perdidas=").concat(jugador.PartidasPerdidasProperty().getValue().toString()).concat(";");
             nuevosDatos = nuevosDatos.concat("puntos=").concat(jugador.PuntosProperty().getValue().toString()).concat(";").concat(imagen.getUrl());
 
-            Utilidades.reemplazarLinea(archivoJugadores, jugador.NombreProperty().getValue()+".*", nuevosDatos);
+            Utilidades.reemplazarLinea(archivoJugadores, jugador.NombreProperty().getValue()+";.*", nuevosDatos);
 
             jugador.setNombre(nuevoNombre);
             jugador.setImagen(imagen);
@@ -95,7 +95,7 @@ public class AdministrarJugadores {
 
             File archivoJugadores = new File(AdministrarJugadores.class.getResource("jugadores.txt").getPath());
 
-            Utilidades.reemplazarLinea(archivoJugadores, jugador.NombreProperty().getValue()+".*", "");
+            Utilidades.reemplazarLinea(archivoJugadores, jugador.NombreProperty().getValue()+";.*", "");
         }catch (NullPointerException ex){
             System.out.println("No se ha podido eliminar al jugador");
         }
@@ -120,5 +120,20 @@ public class AdministrarJugadores {
         }
 
         return ranking;
+    }
+
+    public static void actualizarPuntos(Jugador jugador){
+        String lineaActualizada = jugador.NombreProperty().getValue().concat(";ganadas=").concat(jugador.PartidasGanadasProperty().getValue().toString()).concat(";");
+        lineaActualizada = lineaActualizada.concat("perdidas=").concat(jugador.PartidasPerdidasProperty().getValue().toString()).concat(";");
+        lineaActualizada = lineaActualizada.concat("puntos=").concat(jugador.PuntosProperty().getValue().toString()).concat(";");
+        lineaActualizada = lineaActualizada.concat(jugador.ImagenProperty().getValue().getUrl());
+
+        try {
+            File file = new File(AdministrarJugadores.class.getResource("jugadores.txt").getPath());
+
+            Utilidades.reemplazarLinea(file, jugador.NombreProperty().getValue()+";.*", lineaActualizada);
+        }catch (NullPointerException ex){
+            System.out.println("Archivo de jugadores no encontrado");
+        }
     }
 }

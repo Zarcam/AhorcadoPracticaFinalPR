@@ -4,6 +4,7 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -34,7 +36,7 @@ public class OpcionesPartidaController implements Initializable {
     @FXML
     private TextField fieldPalabra;
     @FXML
-    private ChoiceBox cajaJugador;
+    private ChoiceBox<Jugador> cajaJugador;
     @FXML
     private Tooltip pistaField;
 
@@ -46,24 +48,29 @@ public class OpcionesPartidaController implements Initializable {
     @FXML
     private void pulsadoBoton(ActionEvent event){
         Button boton = (Button) event.getSource();
-        switch(boton.getId()){
-            case "botonOk":
-                String palabra = fieldPalabra.getText();
 
-                if(comprobarPalabraValida(palabra)){
-                    JuegoAhorcadoController.abrirJugar((Stage) boton.getScene().getWindow(), reemplazarTildes(palabra));
-                }else{
-                    animacionBarra.play();
-                    System.out.println("MAAL");
-                }
-                break;
-            case "botonAleatoria":
-                JuegoAhorcadoController.abrirJugar((Stage) boton.getScene().getWindow(), generarPalabra());
-                break;
-            case "botonArchivo":
-                CambiarFicheroController.abrirCambioDeFichero();
-                obtenerArchivoPalabras();
-                break;
+        if(cajaJugador.getSelectionModel().getSelectedItem() == null){
+            System.out.println("Selecciona un jugadores");
+        }else {
+            switch (boton.getId()) {
+                case "botonOk":
+                    String palabra = fieldPalabra.getText();
+
+                    if (comprobarPalabraValida(palabra)) {
+                        JuegoAhorcadoController.abrirJugar((Stage) boton.getScene().getWindow(), reemplazarTildes(palabra), cajaJugador.getSelectionModel().getSelectedItem());
+                    } else {
+                        animacionBarra.play();
+                        System.out.println("MAAL");
+                    }
+                    break;
+                case "botonAleatoria":
+                    JuegoAhorcadoController.abrirJugar((Stage) boton.getScene().getWindow(), generarPalabra(), cajaJugador.getSelectionModel().getSelectedItem());
+                    break;
+                case "botonArchivo":
+                    CambiarFicheroController.abrirCambioDeFichero();
+                    obtenerArchivoPalabras();
+                    break;
+            }
         }
     }
 
@@ -192,5 +199,8 @@ public class OpcionesPartidaController implements Initializable {
 
         pistaField.setShowDelay(Duration.millis(100));
         pistaField.setHideDelay(Duration.millis(1000));
+
+        ArrayList<Jugador> listaJugadores = AdministrarJugadores.extraerJugadoresFichero();
+        cajaJugador.setItems(FXCollections.observableArrayList(listaJugadores));
     }
 }

@@ -9,17 +9,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="100.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.practicafinal.EstadisticasController">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imagenJugador" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/imagenDefault.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="JUGADOR" textAlignment="CENTER">
+            <Label fx:id="labelNombre" alignment="CENTER" maxWidth="1.7976931348623157E308" text="JUGADOR" textAlignment="CENTER">
                <font>
                   <Font size="30.0" />
                </font>
@@ -31,7 +30,7 @@
             <VBox alignment="CENTER">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Selecciona un jugador..." />
-                  <ChoiceBox prefWidth="150.0" />
+                  <ChoiceBox fx:id="seleccionJugador" prefWidth="150.0" />
                </children>
             </VBox>
             <HBox spacing="5.0">
@@ -41,7 +40,7 @@
                         <Font size="19.0" />
                      </font>
                   </Text>
-                  <Label text="0">
+                  <Label fx:id="labelGanadas" text="0">
                      <font>
                         <Font size="19.0" />
                      </font>
@@ -55,7 +54,7 @@
                         <Font size="19.0" />
                      </font>
                   </Text>
-                  <Label text="0">
+                  <Label fx:id="labelPerdidas" text="0">
                      <font>
                         <Font size="19.0" />
                      </font>
@@ -69,7 +68,7 @@
                         <Font size="19.0" />
                      </font>
                   </Text>
-                  <Label text="0">
+                  <Label fx:id="labelRatio" text="0">
                      <font>
                         <Font size="19.0" />
                      </font>
@@ -83,7 +82,7 @@
                         <Font size="19.0" />
                      </font>
                   </Text>
-                  <Label text="0">
+                  <Label fx:id="labelPuntos" text="0">
                      <font>
                         <Font size="19.0" />
                      </font>

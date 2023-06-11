@@ -19,6 +19,11 @@ public class Jugador {
         this.partidasPerdidas.setValue(partidasPerdidas);
     }
 
+    @Override
+    public String toString(){
+        return nombre.getValue();
+    }
+
     public IntegerProperty PuestoProperty(){return puestoRanking;}
 
     public void setPuestoRanking(int puesto){this.puestoRanking.setValue(puesto);}

@@ -31,6 +31,9 @@ public class MenuPrincipalController implements Initializable {
             case "ranking":
                 RankingController.abrirRanking();
                 break;
+            case "estadisticas jugador":
+                EstadisticasController.abrirEstadisticas();
+                break;
             default:
                 break;
         }

@@ -66,13 +66,13 @@ public class EstadisticasController implements Initializable {
             labelPerdidas.setText(jugadorSeleccionado.PartidasPerdidasProperty().getValue().toString());
             labelPuntos.setText(jugadorSeleccionado.PuntosProperty().getValue().toString());
 
-            int ratio;
+            double ratio;
             try {
-                ratio = jugadorSeleccionado.PartidasGanadasProperty().getValue() / jugadorSeleccionado.PartidasPerdidasProperty().getValue();
+                ratio = ((double) jugadorSeleccionado.PartidasGanadasProperty().getValue()) / ((double) jugadorSeleccionado.PartidasPerdidasProperty().getValue());
             }catch (ArithmeticException ex){
                 ratio = 0;
             }
-            labelRatio.setText(Integer.toString(ratio));
+            labelRatio.setText(Double.toString(ratio));
         });
     }
 }

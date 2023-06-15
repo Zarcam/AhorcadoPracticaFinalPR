@@ -28,6 +28,11 @@ public class ModificarJugadoresController implements Initializable {
     private TableColumn<Jugador, Image> columnaImagen;
     @FXML
     private TableColumn<Jugador, String> columnaNombre;
+    @FXML
+    private Button botonEditar;
+    @FXML
+    private Button botonBorrar;
+
 
     private ObservableList<Jugador> jugadores;
 
@@ -94,6 +99,19 @@ public class ModificarJugadoresController implements Initializable {
                   }
               }
             };
+        });
+
+        botonEditar.setDisable(true);
+        botonBorrar.setDisable(true);
+
+        tablaJugadores.getSelectionModel().selectedIndexProperty().addListener(e -> {
+            if(tablaJugadores.getSelectionModel().getSelectedIndex() < 0){
+                botonEditar.setDisable(true);
+                botonBorrar.setDisable(true);
+            }else{
+                botonEditar.setDisable(false);
+                botonBorrar.setDisable(false);
+            }
         });
     }
 }

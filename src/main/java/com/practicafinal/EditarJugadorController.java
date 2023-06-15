@@ -76,12 +76,8 @@ public class EditarJugadorController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(EditarJugadorController.class.getResource("fxml/anadirYEditarJugador.fxml"));
             fxmlLoader.setController(new EditarJugadorController());
-            Parent parent = fxmlLoader.load();
 
-            EditarJugadorController controller = fxmlLoader.getController();
-            controller.initJugadores(jugador, listaJugadores);
-
-            Scene scene = new Scene(parent, 376, 230);
+            Scene scene = new Scene(fxmlLoader.load(), 376, 230);
 
             Stage stage = new Stage();
             stage.setScene(scene);
@@ -89,6 +85,9 @@ public class EditarJugadorController {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Editar jugador");
             stage.setResizable(false);
+
+            EditarJugadorController controller = fxmlLoader.getController();
+            controller.initJugadores(jugador, listaJugadores);
 
             stage.show();
         }catch (IOException ex){

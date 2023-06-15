@@ -39,7 +39,8 @@ public class OpcionesPartidaController implements Initializable {
     private ChoiceBox<Jugador> cajaJugador;
     @FXML
     private Tooltip pistaField;
-
+    @FXML
+    private Button botonVolver;
 
     private File arhivoPalabra;
 
@@ -50,7 +51,7 @@ public class OpcionesPartidaController implements Initializable {
         Button boton = (Button) event.getSource();
 
         if(cajaJugador.getSelectionModel().getSelectedItem() == null){
-            System.out.println("Selecciona un jugadores");
+            System.out.println("Selecciona un jugador");
         }else {
             switch (boton.getId()) {
                 case "botonOk":
@@ -202,5 +203,9 @@ public class OpcionesPartidaController implements Initializable {
 
         ArrayList<Jugador> listaJugadores = AdministrarJugadores.extraerJugadoresFichero();
         cajaJugador.setItems(FXCollections.observableArrayList(listaJugadores));
+
+        botonVolver.setOnAction(event -> {
+            MenuPrincipalController.abrirMenu((Stage) botonVolver.getScene().getWindow());
+        });
     }
 }

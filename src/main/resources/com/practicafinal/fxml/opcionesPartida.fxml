@@ -50,5 +50,6 @@
             </Button>
          </children>
       </HBox>
+      <Button fx:id="botonVolver" mnemonicParsing="false" onAction="#pulsadoBoton" text="&lt;- Volver" />
    </children>
 </VBox>
